@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Memahami transmisi data</title>
+  <title>Transmisi Data</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,7 +18,7 @@
       --accent: #00d4ff;
       --accent-dark: #00a3cc;
       --purple: #c084fc;
-      --gradient: linear-gradient(135deg, #00d4ff 0%, #c084ff 100%);
+      --gradient: linear-gradient(135deg, #00d4ff 0%, #c084fc 100%);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -32,109 +32,212 @@
       background-image: 
         radial-gradient(circle at 15% 50%, rgba(0, 212, 255, 0.08) 0%, transparent 25%),
         radial-gradient(circle at 85% 30%, rgba(192, 132, 252, 0.07) 0%, transparent 30%);
+      overflow-x: hidden;
     }
 
-    .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
-    header { padding: 60px 0 40px; text-align: center; }
+    header { padding: 60px 0 100px; text-align: center; position: relative; }
 
     header h1 {
       font-family: 'Orbitron', monospace;
-      font-size: clamp(2.8rem, 7vw, 5rem);
+      font-size: clamp(3.2rem, 8vw, 7.5rem);
+      font-weight: 700;
       background: var(--gradient);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      letter-spacing: -1px;
-      margin-bottom: 12px;
+      letter-spacing: -2px;
+      line-height: 0.9;
+      margin-bottom: 16px;
+      text-shadow: 0 0 40px rgba(102, 126, 234, 0.4);
     }
 
-    header p.subtitle { font-size: 1.3rem; color: var(--text-muted); }
+    header p.subtitle { font-size: 1.35rem; color: var(--text-muted); max-width: 580px; margin: 0 auto 40px; }
 
-    nav.nav {
+    .nav {
       display: flex;
       justify-content: center;
-      gap: 1.5rem;
-      margin: 30px 0;
+      gap: 2.5rem;
+      margin: 2.5rem 0 4rem;
       flex-wrap: wrap;
     }
 
-    nav.nav a {
+    .nav a {
       color: var(--text);
       text-decoration: none;
       font-weight: 500;
-      padding: 8px 18px;
+      padding: 10px 24px;
       border-radius: 50px;
+      transition: all 0.3s ease;
       background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(10px);
       border: 1px solid rgba(255,255,255,0.08);
     }
 
-    nav.nav a:hover { background: var(--accent); color: #0f0f17; }
-
-    article { background: var(--bg-card); padding: 40px; border-radius: 16px; border: 1px solid rgba(0,212,255,0.15); backdrop-filter: blur(12px); }
-
-    article h1 { font-size: 2.5rem; margin-bottom: 16px; line-height: 1.2; }
-
-    article .meta { color: var(--text-muted); margin-bottom: 40px; font-size: 0.95rem; }
-
-    article img.hero { width: 100%; height: 400px; object-fit: cover; border-radius: 12px; margin-bottom: 30px; }
-
-    article p, article h2, article h3 { margin-bottom: 20px; }
-
-    article a.back { 
-      display: inline-block; 
-      margin-top: 40px; 
-      color: var(--accent); 
-      font-weight: 600; 
-      text-decoration: none; 
-      padding: 10px 20px; 
-      border: 1px solid var(--accent); 
-      border-radius: 50px; 
+    .nav a:hover, .nav a.active {
+      background: var(--accent);
+      color: #0f0f17;
+      box-shadow: 0 0 25px rgba(0, 212, 255, 0.45);
+      transform: translateY(-3px);
     }
 
-    footer { text-align: center; padding: 80px 0; color: var(--text-muted); font-size: 0.95rem; border-top: 1px solid rgba(255,255,255,0.05); }
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+      gap: 2.2rem;
+      padding: 40px 0 100px;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.06);
+      backdrop-filter: blur(12px);
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      position: relative;
+    }
+
+    .card:hover {
+      transform: translateY(-14px) scale(1.02);
+      box-shadow: 0 30px 70px rgba(0,0,0,0.5),
+                  0 0 0 1px rgba(0,212,255,0.15) inset;
+    }
+
+    .card-img {
+      height: 220px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(15,15,23,0.9), transparent 60%);
+      opacity: 0.7;
+    }
+
+    .card-content { padding: 28px 32px 36px; }
+
+    .category {
+      display: inline-block;
+      padding: 6px 14px;
+      background: rgba(0,212,255,0.12);
+      color: var(--accent);
+      border-radius: 50px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .card h2 { font-size: 1.48rem; margin-bottom: 14px; line-height: 1.3; }
+
+    .card h2 a { color: inherit; text-decoration: none; }
+
+    .excerpt { color: var(--text-muted); font-size: 0.96rem; margin-bottom: 24px; }
+
+    .meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .read-more { color: var(--accent); text-decoration: none; font-weight: 600; }
+
+    .read-more:hover { text-decoration: underline; }
+
+    footer {
+      text-align: center;
+      padding: 80px 0 120px;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    @media (max-width: 768px) {
+      header { padding: 40px 0 70px; }
+      .blog-grid { grid-template-columns: 1fr; }
+      .nav { gap: 1.2rem; }
+      .nav a { padding: 8px 16px; font-size: 0.95rem; }
+    }
   </style>
 </head>
-<body>
+</body>
 
   <header>
     <div class="container">
       <h1>L - MANUK SOCIETY</h1>
-      <p class="subtitle">Memahami Transmisi Data</p>
-      <nav class="nav">
-        <a href="../index.html">Home</a>
-        <a href="#">Dasar Transmisi</a>
-        <a href="#">Media Fisik</a>
-        <a href="#">Protokol</a>
-        <a href="#">About</a>
+      <p class="subtitle">Defining the pulse of the digital age with flawless logic. We bridge the gap between imagination and infrastructure.
+     </p>
+
+      <nav class=nav>
+        <a href="#" class="active">Home</a>
+        <a href="#TRANSMISI DIGITAL"class="active">TRANSMISI DIGITAL</a>
+        <a href="#"></a>
+        <a href="#"></a>
+        <a href="#"></a>
       </nav>
     </div>
   </header>
 
-  <main class="container" style="padding: 40px 0 80px;">
-    <article>
-      <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=2000" alt="Serat optik transmisi data" class="hero">
-      
-      <h1>Transmisi Data </h1>
-      <div class="meta">Feb 10, 2026 • 8 min read</div>
+  <main class="container">
+    <div class="blog-grid">
 
-      <p>Transmisi data (atau sering disebut komunikasi data) merupakan proses pengiriman dan penerimaan informasi digital dari satu perangkat ke perangkat lainnya melalui saluran komunikasi tertentu. Secara lebih lengkap, transmisi data didefinisikan sebagai transfer bitstream digital (atau sinyal analog yang telah didigitalisasi) melalui media saluran komunikasi yang menghubungkan titik ke titik (point-to-point) maupun dari satu titik ke banyak titik (point-to-multipoint). Proses ini memungkinkan data—yang pada dasarnya berupa representasi biner 0 dan 1—dapat berpindah dari sumber (pengirim) menuju tujuan (penerima) dengan representasi berupa sinyal elektromagnetik, seperti tegangan listrik, gelombang radio, gelombang mikro, sinyal inframerah, cahaya pada serat optik, dan sebagainya.
-Dalam konteks yang lebih luas, transmisi data adalah bagian inti dari komunikasi digital modern yang memungkinkan pertukaran informasi antara dua atau lebih perangkat elektronik, baik dalam jarak dekat (misalnya melalui bus komputer di dalam perangkat) maupun jarak jauh (melalui jaringan kabel, nirkabel, atau satelit). Proses ini tidak hanya sekadar mengirim bit demi bit, melainkan melibatkan serangkaian langkah agar data sampai dengan benar, utuh, dan dalam waktu yang sesuai kebutuhan.</p>
-      
-      <p>Secara umum, transmisi data melibatkan beberapa komponen utama yang bekerja bersama. Pertama, terdapat sumber data atau pengirim (transmitter) yang mengubah informasi asli—berupa teks, gambar, suara, video, atau data sensor—menjadi bentuk sinyal yang dapat ditransmisikan. Kemudian sinyal tersebut dikirim melalui medium atau kanal transmisi, yang bisa berupa media berpandu (guided media) seperti kabel tembaga, kabel koaksial, atau serat optik, maupun media tak berpandu (unguided media) seperti gelombang radio, Wi-Fi, atau gelombang mikro. Di sisi penerima, receiver akan menangkap sinyal tersebut, mendeteksinya, dan mengubahnya kembali menjadi bentuk data yang dapat dimengerti oleh perangkat tujuan.
-Transmisi data dapat dilakukan dalam dua bentuk utama sinyal, yaitu analog dan digital. Transmisi analog mengirimkan sinyal kontinu yang bervariasi secara mulus (seperti suara pada telepon analog lama), sementara transmisi digital mengirimkan sinyal diskrit berupa denyut tegangan yang mewakili bit 0 dan 1. Karena hampir semua perangkat komputasi modern bekerja dengan data digital, transmisi digital menjadi dominan saat ini, meskipun sering kali data digital masih harus dimodulasi ke bentuk analog ketika melewati media tertentu (misalnya melalui modem atau modulasi pada Wi-Fi dan seluler).</p>
+      <!-- Artikel 1 -->
+      <section id="TRANSMISI DIGITAL">
+      <article class="card">
+        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=1200');"></div>
+        <div class="card-content">
+          <div class="category">TRANSMISI DIGITAL</div></div>
+          <h2><a href="artikel/transmisi-serat-optik.html">Memahami transmisi data</a></h2>
+          <p class="excerpt">Transmisi data (atau sering disebut komunikasi data) merupakan proses pengiriman dan penerimaan informasi digital dari satu perangkat ke perangkat lainnya...</p>
+          <div class="meta">
+            <span>Feb 10, 2026 • 8 min read</span>
+            <a href="Transmisi data.html" class="read-more">Baca selengkapnya →</a>
+          </div>
+        </div>
+      </article>
 
-<p>Proses transmisi data juga dibedakan berdasarkan arah aliran informasi. Ada mode simplex (hanya satu arah, seperti siaran radio), half-duplex (dua arah tapi bergantian, seperti walkie-talkie), dan full-duplex (dua arah secara simultan, seperti panggilan telepon atau koneksi internet modern). Selain itu, pengiriman bit dapat dilakukan secara serial (satu bit demi satu bit melalui satu jalur) atau paralel (beberapa bit sekaligus melalui jalur banyak), serta secara sinkron (menggunakan sinyal clock bersama) atau asinkron (dengan penanda start dan stop bit tanpa clock bersama).
-Inti dari transmisi data yang baik adalah memastikan integritas, keandalan, dan efisiensi. Integritas berarti data yang diterima sama persis dengan yang dikirim (tanpa perubahan akibat noise atau gangguan). Keandalan dicapai melalui mekanisme deteksi dan koreksi error, sedangkan efisiensi berkaitan dengan penggunaan bandwidth yang optimal serta minimnya overhead (bit tambahan yang tidak membawa informasi utama).
-Dengan demikian, transmisi data bukan sekadar pengiriman sinyal, melainkan keseluruhan proses teknis yang mencakup pengkodean, modulasi, propagasi sinyal melalui medium, demodulasi, sinkronisasi, pengendalian aliran, pengendalian kesalahan, hingga pengiriman ulang jika diperlukan—semua itu agar informasi dapat sampai ke tujuan dengan akurat dan tepat waktu dalam sistem komunikasi digital saat ini.</p>
+      <!-- Artikel 2 -->
+      <article class="card">
+        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1558494949-ef0d7d6d0d6c?auto=format&fit=crop&q=80&w=1200');"></div>
+        <div class="card-content">
+          <div class="category">ー</div>
+          <h2><a href="artikel/wifi-7-transmisi-nirkabel.html">ー</a></h2>
+          <p class="excerpt">ー</p>
+          <div class="meta">
+            <span>Feb 9, 2026 • 10 min read</span>
+            <a href="artikel/wifi-7-transmisi-nirkabel.html" class="read-more">Baca selengkapnya →</a>
+          </div>
+        </div>
+      </article>
 
-      <a href="www.html" class="back">← Kembali ke Beranda</a>
-    </article>
+      <!-- Artikel 3 -->
+      <article class="card">
+        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1555066931-bf19c9d7b6f8?auto=format&fit=crop&q=80&w=1200');"></div>
+        <div class="card-content">
+          <div class="category">ー</div>
+          <h2><a href="artikel/osi-layer-transmisi-data.html">ー</a></h2>
+          <p class="excerpt">ー</p>
+          <div class="meta">
+            <span>Feb 8, 2026 • 11 min read</span>
+            <a href="artikel/osi-layer-transmisi-data.html" class="read-more">Baca selengkapnya →</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
   </main>
 
   <footer>
     <div class="container">
-      <p>© 2026 L - MANUK SOCIETY </p>
+      <p>© 2026 L - MANUK SOCIETY• Made with HTML & CSS • Fokus Transmisi Data & Jaringan</p>
     </div>
   </footer>
 
